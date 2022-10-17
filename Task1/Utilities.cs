@@ -41,13 +41,13 @@ public static class Utilities
     {
         if (products == null)
         {
-            throw new ArgumentNullException();
+            throw new ArgumentNullException(nameof(products));
         }
         if (predicate == null)
         {
-            throw new ArgumentNullException();
+            throw new ArgumentNullException(nameof(predicate));
         }
-        for (int i = 0; i < products.Length; i++)
+        for (int i = 0; i <= products.Length - 1; i++)
         {
             var product = products[i];
             if (predicate(product))
