@@ -1,4 +1,6 @@
-﻿namespace Task1;
+﻿using System;
+
+namespace Task1;
 
 public class Product
 {
@@ -22,4 +24,6 @@ public class Product
 
         return false;
     }
+
+    public override int GetHashCode() => HashCode.Combine(Name, Price);
 }
