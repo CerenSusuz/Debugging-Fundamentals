@@ -12,18 +12,19 @@ public static class Utilities
     {
         if (numbers == null)
         {
-            throw new ArgumentNullException();
+            throw new ArgumentNullException("numbers cannot be null");
         }
+
         int temp;
-        for (int i = 0; i < numbers.Length - 1; i++)
+        for (int i = 0; i < numbers.Length; i++)
         {
-            for (int j = 0; j < numbers.Length - i - 1; j++)
+            for (int j = i; j < numbers.Length; j++)
             {
-                if (numbers[j] > numbers[j + 1])
+                if (numbers[i] > numbers[j])
                 {
                     temp = numbers[j];
-                    numbers[j] = numbers[j + 1];
-                    numbers[j + 1] = temp;
+                    numbers[j] = numbers[i];
+                    numbers[i] = temp;
                 }
             }
         }
@@ -41,20 +42,30 @@ public static class Utilities
     {
         if (products == null)
         {
-            throw new ArgumentNullException(nameof(products));
+            throw new ArgumentNullException("products cannot be null");
         }
-        if (predicate == null)
-        {
-            throw new ArgumentNullException(nameof(predicate));
-        }
-        for (int i = 0; i <= products.Length - 1; i++)
+        
+        for (int i = 0; i < products.Length; i++)
         {
             var product = products[i];
-            if (predicate(product))
+            try
             {
-                return i;
+                if (predicate(product))
+                {
+                    return i;
+                }
             }
+            catch(NullReferenceException ex)
+            {
+                throw new ArgumentNullException(ex.Message);
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+            
         }
+
         return -1;
     }
 }

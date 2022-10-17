@@ -11,4 +11,15 @@ public class Product
     public string Name { get; set; }
 
     public double Price { get; set; }
+
+    public override bool Equals(object obj)
+    {
+        if (obj is Product)
+        {
+            var product = obj as Product;
+            return product.Name == Name && product.Price == Price;
+        }
+
+        return false;
+    }
 }
